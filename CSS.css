@@ -2,6 +2,27 @@
 {
     text-align: center;
     grid-template-columns: 10fr 5fr;
+    margin-top: 30px;
+}
+#timer 
+{
+    font-weight: bold;
+    border-color: black;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 5px;
+    margin-left: 1050px;
+    width: 300px;
+    height: 100px;
+    font-size: 70px;
+    background-color: aliceblue;
+}
+#MOVE 
+{
+    font-style: italic;
+    color: darkslategrey;
+    font-size: 50px;
+    margin-top: 65px;
 }
 #statement1 
 {
@@ -19,22 +40,24 @@
 }
 #left
 {
+    float: left;
     text-align: center;
-    margin-top: 20px;
     margin-left: 24%;
 }
 #right
 {
+    float: left;
     text-align: center;
-    margin-left: 36%;
+    margin-top: 65px;
+    margin-left: 150px;
 }
 .block 
 {
     background-color: peachpuff;
     border-color: peachpuff;
     border-radius: 50%;
-    width: 125px;
-    height: 125px;
+    width: 180px;
+    height: 180px;
 
 }
 #HEADING 
@@ -68,7 +91,7 @@
 body {
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+    animation: gradient 8s ease infinite;
     height: 100vh;
 }
 
@@ -76,11 +99,9 @@ body {
     0% {
         background-position: 0% 50%;
     }
- 
     50% {
-        background-position: 100% 50%;
+        background-position: 50% 50%;
     }
- 
     100% {
         background-position: 0% 50%;
     }
