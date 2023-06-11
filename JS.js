@@ -5,6 +5,7 @@ var y_add = [0, 1, 0, -1];
 var checker = [];
 var NUMBER_OF_CHANGE = 10;
 var str = "";
+var second = 0;
 function change(x, y)
 {
     let num = x*10+y;
@@ -42,7 +43,7 @@ function CHECK_RESULT()
 }
 function EVENTCHANGE(x, y)
 {
-    if(NUMBER_OF_CHANGE>=3) return;
+    if(NUMBER_OF_CHANGE>=3||second<0) return;
     change(x,y);
     for(let i = 0; i< 4; i++)
     {
@@ -51,6 +52,7 @@ function EVENTCHANGE(x, y)
         change(xnew,ynew);
     }
     NUMBER_OF_CHANGE++;
+    document.getElementById("MOVE").innerHTML = (3-NUMBER_OF_CHANGE).toString()+ " MOVES LEFT";
     if(NUMBER_OF_CHANGE==3)
     {
         CHECK_RESULT();
@@ -58,12 +60,14 @@ function EVENTCHANGE(x, y)
 }
 function random(min, max) {
     return Math.min(max,Math.floor(Math.random() * (max - min) ) + min);
-  }
+}
 function init() 
 {
     NUMBER_OF_CHANGE = 0;
     document.getElementById("HEADING").innerHTML = "GO FOR IT !!!!!!!";
     document.getElementById("ANSWER").innerHTML = "";
+    document.getElementById("MOVE").innerHTML = "3 MOVES LEFT";
+    document.getElementById("BUTT").style.display = "none";
     for(let i = 0; i< 3; i++)
     {
         for(let j = 0; j< 3; j++)
@@ -114,11 +118,30 @@ function init()
             }
         }
     }
+    document.getElementById("timer").innerHTML = "2 m 0 s"
+    second = 119;
+    const COUNTDOWN = setInterval(function()
+    {
+        if(NUMBER_OF_CHANGE==3) 
+        {
+            clearInterval(COUNTDOWN);
+        document.getElementById("BUTT").style.display = "initial";
+            return;
+        }
+        if(second==-1) return;
+        document.getElementById("timer").innerHTML = Math.floor(second/60).toString() + " m " + (second%60).toString() + " s";
+        if(second==0) 
+        {
+            document.getElementById("HEADING").innerHTML = "TIME'S UP";
+            clearInterval(COUNTDOWN);
+            document.getElementById("BUTT").style.display = "initial";
+        }
+        second--;
+    }, 1000);
 }
 function main()
 {
-    const small_tab = document.createElement("table");
-    small_tab.setAttribute("id","left");
+    const small_tab = document.getElementById("right");
     for(let i = 0; i < 3; i++)
     {
         const small_tr = small_tab.insertRow();
@@ -133,8 +156,7 @@ function main()
             small_tc.appendChild(x);
         }
     }
-    document.getElementById("left").appendChild(small_tab);
-    const tab = document.createElement("table");
+    const tab = document.getElementById("left");
     for(let i = 0; i < 3; i++)
     {
         const tr = tab.insertRow();
@@ -159,15 +181,14 @@ function main()
         checker.push(checker_row);
     }
     
-    document.getElementById("right").appendChild(tab);
     for(let i = 0; i < 3; i++)
     {
         for(let j = 0; j< 3; j++)
         {
             let num = i*10+j;
             let text = num.toString();
-            document.getElementById("small"+text).style.width = "60px";
-            document.getElementById("small"+text).style.height = "60px";
+            document.getElementById("small"+text).style.width = "80px";
+            document.getElementById("small"+text).style.height = "80px";
         }
     }
 }
